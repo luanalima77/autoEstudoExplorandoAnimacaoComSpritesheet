@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sprite sheet animation using Phaser 3</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <style type="text/css">
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+    //***CÓDIGO DISPONIBILIZADO PARA TESTES E APRENDIZADO DO PHASER***
+      var config = {
+        type: Phaser.AUTO, //Renderização
+        width: 400, //Largura
+        height: 350, //Altura
+        parent: "phaser-example", //Elemento pai do conteúdo
+        scene: {
+          preload: preload, //Carregar conteúdo
+          create: create //Criar e mostrar conteúdo
+        }
+      };
+
+      var game = new Phaser.Game(config);
+
+      //Configurando o spritesheet (largura e altura)
+      function preload() {
+        this.load.spritesheet("guy", "capguy-walk-1472.png", {
+          frameWidth: 184,
+          frameHeight: 325
+        });
+      }
+
+
+      //Animando o spritesheet
+      function create() {
+        var config = {
+            key: "guyAnimation",
+            frames: this.anims.generateFrameNumbers("guy", {
+            start: 0,
+            end: 8,
+            first: 0
+          }),
+          frameRate: 10,
+          repeat: -1
+        };
+
+        this.anims.create(config);
+
+        //Adicionando sprite na posição horizontal 150 e na posição vertical 170
+        this.add.sprite(150, 170, "guy").play("guyAnimation");
+      }
+    </script>
+  </body>
+</html>
